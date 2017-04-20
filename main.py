@@ -46,6 +46,7 @@ def openRow(device, start, end, row):
 
 
 if True:
+    # device.press('KEYCODE_BACK')
     openRow(device, 1, 5, 0)
     print('done')
     # device.startActivity(component=component)
@@ -64,4 +65,5 @@ if True:
     # device.dragDip((55,344),(55,345), 2000, -1)
 
 
-    # device.drag((15, 1000), (15, 827.55), 1000, 20, 0)
+    # for _ in range(20):
+    #     device.drag((15, 1000), (15, 827.45), 1000, 20, 0)
