@@ -27,28 +27,31 @@ except:
     pass
 
 from com.dtmilano.android.viewclient import ViewClient
+from datetime import datetime
 
 package='com.nintendo.zaba'
 activity='org.cocos2dx.cpp.AppActivity'
 component=package + "/" + activity
 device, serialno = ViewClient.connectToDeviceOrExit()
 cwd = os.path.dirname(os.path.abspath(__file__))
+
 def openRow(device, start, end, row):
     iter = 70
     x = 65
     for i in range(start, end):
         print('Getting image ' + str(i) + ' of row ' + str(row))
         device.dragDip((x + (iter*i), 344), (x + (iter*i), 345), 2000, -1)
-        ViewClient.sleep(2)
         ViewClient(device, serialno).writeImageToFile(cwd + '/' + str(i) +'.png', 'PNG', None, False, False)
         device.press('KEYCODE_BACK')
 
 
 
 if True:
+    startTime = datetime.now()
+
     # device.press('KEYCODE_BACK')
-    openRow(device, 1, 5, 0)
-    print('done')
+    openRow(device, 1, 2, 0)
+    print('Script Complete: ' + str(datetime.now() - startTime))
     # device.startActivity(component=component)
     # ViewClient.sleep(10)
     # #Touch somewhere to progress from splash screen
