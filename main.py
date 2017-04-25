@@ -1,13 +1,4 @@
 #! /usr/bin/env python
-'''
-Copyright (C) 2012  Diego Torres Milano
-Created on Feb 1, 2012
-
-@author: diego
-'''
-
-
-import re
 import sys
 import os
 
@@ -35,22 +26,43 @@ component=package + "/" + activity
 device, serialno = ViewClient.connectToDeviceOrExit()
 cwd = os.path.dirname(os.path.abspath(__file__))
 
-def openRow(device, start, end, row):
+def openRow(device, start, end, row, y=344):
     iter = 70
     x = 65
     for i in range(start, end):
-        print('Getting image ' + str(i) + ' of row ' + str(row))
-        device.dragDip((x + (iter*i), 344), (x + (iter*i), 345), 2000, -1)
-        ViewClient(device, serialno).writeImageToFile(cwd + '/' + str(i) +'.png', 'PNG', None, False, False)
+        print 'Getting image ' + str(i) + ' of row ' + str(row)
+        device.dragDip((x + (iter*i), y), (x + (iter*i), y+1), 2000, -1)
+        ViewClient(device, serialno).writeImageToFile(cwd + '/images/' + str(row) + '-' + str(i) +'.png', 'PNG', None, False, False)
         device.press('KEYCODE_BACK')
 
-
+HEROES_PER_ROW = 5
+HERO_COUNT = 198
+FIRST_ROW = 4
+FINAL_ROW = (HERO_COUNT - 4) % HEROES_PER_ROW
+ROWS_COUNT = (HERO_COUNT - FIRST_ROW - FINAL_ROW) / HEROES_PER_ROW
 
 if True:
     startTime = datetime.now()
 
-    # device.press('KEYCODE_BACK')
-    openRow(device, 1, 2, 0)
+    # print "Read First Row"
+    # openRow(device, 1, HEROES_PER_ROW, 0)
+
+    # row = 1
+    # for _ in range(ROWS_COUNT - 3):
+    #     device.drag((15, 1000), (15, 827.45), 1000, 20, 0)
+    #     openRow(device, 0, HEROES_PER_ROW, row)
+    #     row += 1
+
+    print "Read Final Rows"
+    openRow(device, 0, HEROES_PER_ROW, ROWS_COUNT - 2, 405)
+    openRow(device, 0, HEROES_PER_ROW, ROWS_COUNT - 1, 480)
+    openRow(device, 0, HEROES_PER_ROW, ROWS_COUNT, 555)
+    openRow(device, 0, FINAL_ROW, ROWS_COUNT + 1, 630)
+
+
+
+
+
     print('Script Complete: ' + str(datetime.now() - startTime))
     # device.startActivity(component=component)
     # ViewClient.sleep(10)
@@ -68,5 +80,6 @@ if True:
     # device.dragDip((55,344),(55,345), 2000, -1)
 
 
-    # for _ in range(20):
+    # for _ in range(34):
+    #     print("Dragging")
     #     device.drag((15, 1000), (15, 827.45), 1000, 20, 0)
