@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-wpn = "Rauarblade"
-wpns = ["Bolganone", "Bolganone+", "Brynhildr", "Cymbeline", "Elfire", "Fenrir", "Fenrir+", "Fire", "Flux", "Rauðrblade", "Rauðrblade+", "Rauðrraven", "Rauðrraven+", "Rauðrwolf", "Rauðrwolf+", "Ruin"]
-
 def levenshtein(s1, s2):
     if len(s1) < len(s2):
         return levenshtein(s2, s1)
@@ -23,16 +18,14 @@ def levenshtein(s1, s2):
 
     return previous_row[-1]
 
-distance = 10000
-name = ""
+def findNearestMatch(text, potentialMatches):
+    distance = 10000
+    match = ""
 
-for x in wpns:
-    dist = levenshtein(wpn, x)
-    if dist < distance:
-        distance = dist
-        name = x
+    for x in potentialMatches:
+        dist = levenshtein(text, x)
+        if dist < distance:
+            distance = dist
+            match = x
 
-print wpn
-print name
-print distance
-
+    return match

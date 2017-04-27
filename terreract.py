@@ -7,11 +7,11 @@ from datetime import datetime
 import os
 
 RARITY_IMAGES = [
-    Image.open("./assets/1star.png"),
-    Image.open("./assets/2star.png"),
-    Image.open("./assets/3star.png"),
-    Image.open("./assets/4star.png"),
-    Image.open("./assets/5star.png")
+    Image.open("./assets/rarity/1star.png"),
+    Image.open("./assets/rarity/2star.png"),
+    Image.open("./assets/rarity/3star.png"),
+    Image.open("./assets/rarity/4star.png"),
+    Image.open("./assets/rarity/5star.png")
 ]
 
 def getTextFromImage(image):
@@ -25,8 +25,9 @@ def getHeroRarity(image):
 
 def getHeroDataFromImage(originalImage, transformedImage):
     hero = {}
-    hero['name'] = getTextFromImage(transformedImage.crop((50, 950, 550, 1035)))
-    hero['title'] = getTextFromImage(transformedImage.crop((30, 830, 570, 915)))
+
+    hero['name'] = getTextFromImage(transformedImage.crop((70, 950, 550, 1035)))
+    hero['title'] = getTextFromImage(transformedImage.crop((35, 840, 550, 915)))
     hero["hm"] = getTextFromImage(transformedImage.crop((250, 1635, 500, 1710)))
     hero["sp"] = getTextFromImage(transformedImage.crop((250, 1560, 500, 1635)))
     hero["res"] = getTextFromImage(transformedImage.crop((250, 1485, 500, 1560)))
@@ -74,7 +75,7 @@ if __name__ == '__main__':
         if file.endswith(".png"):
             heroesList.append(heroImageToKeyValuePairs('./images/' + file))
 
-    with open('herodata.json', 'w') as outfile:
+    with open('rawherodata.json', 'w') as outfile:
         json.dump(heroesList, outfile)
 
     print('Script Complete: ' + str(datetime.now() - startTime))
