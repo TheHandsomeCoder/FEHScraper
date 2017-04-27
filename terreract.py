@@ -25,7 +25,6 @@ def getHeroRarity(image):
 
 def getHeroDataFromImage(originalImage, transformedImage):
     hero = {}
-
     hero['name'] = getTextFromImage(transformedImage.crop((70, 950, 550, 1035)))
     hero['title'] = getTextFromImage(transformedImage.crop((35, 840, 550, 915)))
     hero["hm"] = getTextFromImage(transformedImage.crop((250, 1635, 500, 1710)))
@@ -36,9 +35,9 @@ def getHeroDataFromImage(originalImage, transformedImage):
     hero["atk"] = getTextFromImage(transformedImage.crop((250, 1260, 500, 1335)))
     hero["hp"] = getTextFromImage(transformedImage.crop((250, 1185, 500, 1260)))
     hero["lv"] = getTextFromImage(transformedImage.crop((230, 1100, 350, 1175)))
-    hero["exp"] = getTextFromImage(transformedImage.crop((610, 1110, 900, 1165)))
+    hero["exp"] = getTextFromImage(transformedImage.crop((610, 1115, 900, 1145)))
     hero["weapon"] = getTextFromImage(transformedImage.crop((620, 1195, 1075, 1270)))
-    hero["support"] = getTextFromImage(transformedImage.crop((620, 1270, 1075, 1345)))
+    hero["assist"] = getTextFromImage(transformedImage.crop((620, 1270, 1075, 1345)))
     hero["special"] = getTextFromImage(transformedImage.crop((620, 1345, 1075, 1420)))
     hero["aSlot"] = getTextFromImage(transformedImage.crop((620, 1420, 1075, 1495)))
     hero["bSlot"] = getTextFromImage(transformedImage.crop((620, 1495, 1075, 1570)))
@@ -69,7 +68,7 @@ def heroImageToKeyValuePairs(imagePath):
 
 if __name__ == '__main__':
     startTime = datetime.now()
-
+    # print heroImageToKeyValuePairs('./images/9-0.png')
     heroesList = []
     for file in os.listdir("./images"):
         if file.endswith(".png"):

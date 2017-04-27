@@ -27,5 +27,4 @@ def findNearestMatch(text, potentialMatches):
         if dist < distance:
             distance = dist
             match = x
-
     return match
